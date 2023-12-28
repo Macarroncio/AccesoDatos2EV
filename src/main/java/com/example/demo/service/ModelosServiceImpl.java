@@ -43,13 +43,19 @@ public class ModelosServiceImpl implements ModelosService {
 
 	@Override
 	public void anadirModelos(Modelos modelos) {
-		// TODO Auto-generated method stub
+		modelosRepository.save(modelos);
 		
 	}
 
 	@Override
 	public void eliminarModelos(Long id) throws NotFoundException {
-		// TODO Auto-generated method stub
+		Optional<Modelos> modelos = obtenerModelosPorId(id);
+		if(modelos.isPresent()) {
+			modelosRepository.delete(modelos.orElse(null));
+		} else {
+			throw new NotFoundException();
+		}
+		
 		
 	}
 
