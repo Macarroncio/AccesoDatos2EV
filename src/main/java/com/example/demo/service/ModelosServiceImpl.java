@@ -12,6 +12,8 @@ import com.example.demo.repository.ModelosRepository;
 
 @Service
 public class ModelosServiceImpl implements ModelosService {
+	//TODO tengo que revisar como hacer para relacionar con marcas
+	
 	
 	@Autowired
 	public ModelosRepository modelosRepository;

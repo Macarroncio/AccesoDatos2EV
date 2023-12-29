@@ -47,10 +47,17 @@ public class ModelosController {
 		}
 		return "modelos/listar";
 	}
+	
 	@GetMapping("/eliminar")
 	public String eliminarModelos(Long id) throws NotFoundException {
 		
 		modServ.eliminarModelos(id);
+		return "/modelos/listar";
+	}
+	
+	@PostMapping("/anadir")
+	public String anadirModelo(Modelos modelos) {
+		modServ.anadirModelos(modelos);
 		return "/modelos/listar";
 	}
 }
