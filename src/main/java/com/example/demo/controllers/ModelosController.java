@@ -8,6 +8,7 @@ import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -48,16 +49,16 @@ public class ModelosController {
 		return "modelos/listar";
 	}
 	
-	@GetMapping("/eliminar")
-	public String eliminarModelos(Long id) throws NotFoundException {
+	@GetMapping("/eliminar/{id}")
+	public String eliminarModelos(@PathVariable Long id	) throws NotFoundException {
 		
 		modServ.eliminarModelos(id);
-		return "/modelos/listar";
+		return "redirect:/modelos/listar";
 	}
 	
 	@PostMapping("/anadir")
 	public String anadirModelo(Modelos modelos) {
 		modServ.anadirModelos(modelos);
-		return "/modelos/listar";
+		return "redirect:/modelos/listar";
 	}
 }

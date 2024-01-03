@@ -7,6 +7,7 @@ import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -28,29 +29,30 @@ public class MarcasController {
 		return "listadoMarcas";
 	}
 
-	@PostMapping("/actualizar/")
-	public String actualizarMarcas(Marcas marcaActualizado) throws NotFoundException {
+	@PostMapping("/actualizar/{id}")
+	public String actualizarMarcas(@PathVariable Long id, Marcas marcaActualizado) throws NotFoundException {
 		try {
 			marServ.actualizarMarca(marcaActualizado);
 		}catch (NotFoundException e){
 
 			//TODO aqui hay que hacer algo para que devuelva un mensaje de que algo ha ido mal y el motivo
+			//TODO hay que modificar el service para que acepte un id 
 			e.printStackTrace();
 			return "redirect:/marcas/formulario";
 		}
-		return "marcas/listar";
+		return "redirect:marcas/listar";
 	}
 
-	@GetMapping("/eliminar")
-	public String eliminarMarcas(Long id) throws NotFoundException {
+	@GetMapping("/eliminar/{id}")
+	public String eliminarMarcas(@PathVariable Long id) throws NotFoundException {
 
 		marServ.eliminarMarcas(id);
-		return "/marcas/listar";
+		return "redirect:/marcas/listar";
 	}
 
 	@PostMapping("/anadir")
 	public String anadirModelo(Marcas marcas) {
 		marServ.anadirMarcas(marcas);
-		return "/marcas/listar";
+		return "redirect:/marcas/listar";
 	}
 }
