@@ -29,7 +29,7 @@ public class ModelosController {
 	public String listarModelos(Model model) throws NotFoundException {
 		List<Modelos> listaModelos = modServ.obtenerTodosModelos();
 		model.addAttribute("listaModelos", listaModelos);
-		return "modelos/listado";
+		return "listadoModelos";
 	}
 	
 	/*Muy importante a la hora de diseñar la app de forma segura: todo lo que sean cosas tontas como listados
