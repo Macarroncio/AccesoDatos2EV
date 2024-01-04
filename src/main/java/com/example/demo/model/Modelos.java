@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,7 +19,7 @@ public class Modelos {
 
 	    private String nombre;
 
-	    @ManyToOne
+	    @ManyToOne(cascade = CascadeType.ALL)
 	    @JoinColumn(name = "id_marca", nullable = false)
 	    private Marcas marcas;
 

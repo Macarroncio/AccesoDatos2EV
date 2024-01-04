@@ -67,8 +67,13 @@ public class MarcasServiceImpl implements MarcasService {
 
 	@Override
 	public void eliminarMarcas(Long id) throws NotFoundException {
-		marcasRepository.deleteById(id);
-		
+		Optional<Marcas> optMarca = obtenerMarcasPorId(id);
+		if(optMarca.isPresent()) {
+			Marcas marca = optMarca.orElse(null);
+			marcasRepository.delete(marca);
+		} else {
+			throw new NotFoundException();
+		}		
 	}
 	
 	
