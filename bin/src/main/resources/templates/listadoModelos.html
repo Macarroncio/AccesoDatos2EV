@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Modelos</title>
+</head>
+<body>
+
+    <h2>Listado de Modelos</h2>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Marca</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Iterar sobre la lista de modelos -->
+            <tr th:each="modelo : ${listaModelos}">
+                <td th:text="${modelo.id}"></td>
+                <td th:text="${modelo.nombre}"></td>
+                <td th:text="${modelo.marca.nombre}"></td> <!-- Acceso al nombre de la marca -->
+                <td>
+                    <!-- Enlaces para actualizar y eliminar cada modelo -->
+                    <a th:href="@{'/modelos/actualizar/' + ${modelo.id}}">Actualizar</a>
+                    <a th:href="@{'/modelos/eliminar/' + ${modelo.id}}">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
