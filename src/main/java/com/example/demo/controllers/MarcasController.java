@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
@@ -18,6 +19,8 @@ import com.example.demo.service.MarcasServiceImpl;
 @Controller
 @RequestMapping("/marcas")
 public class MarcasController {
+	
+	
 
 	//TODO añadir todos los comentarios pertinentes para cada funcion
 	@Autowired
@@ -27,21 +30,27 @@ public class MarcasController {
 	public String listarMarcas(Model model) throws NotFoundException {
 		List<Marcas> listaMarcas = marServ.obtenerTodasMarcas();
 		model.addAttribute("listaMarcas", listaMarcas);
-		return "listadoMarcas";
+		
+		String mensajeExito = "Operación realizada con éxito";
+        model.addAttribute("mensajeExito", mensajeExito);
+		
+        return "listadoMarcas";
 	}
 
 	@GetMapping("/actualizar/{id}")
-	public String actualizarMarcas(@PathVariable Long id, Marcas marcaActualizado) throws NotFoundException {
+	public String actualizarMarcas(@PathVariable Long id) throws NotFoundException {
 		try {
-			marServ.actualizarMarca(marcaActualizado);
+			Optional<Marcas> optMarca = marServ.obtenerMarcasPorId(id);
+			Marcas marcaActualizada = optMarca.orElse(null);
+			marServ.actualizarMarca(marcaActualizada);
 		}catch (NotFoundException e){
 
 			//TODO aqui hay que hacer algo para que devuelva un mensaje de que algo ha ido mal y el motivo
 			//TODO hay que modificar el service para que acepte un id 
 			e.printStackTrace();
-			return "marcas/formulario";
+			return "marcas/listar";
 		}
-		return "marcas/listar";
+		return "formularioMarca";
 	}
 
 	@GetMapping("/eliminar/{id}")

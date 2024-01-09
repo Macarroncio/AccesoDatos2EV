@@ -39,8 +39,8 @@ public class ModelosController {
 	/*Muy importante a la hora de diseñar la app de forma segura: todo lo que sean cosas tontas como listados
 	*publicos y demás va con GET, todo lo que sea info privada usada en actualizaciones e inserciones va en POST
 	*/
-	@PostMapping("/actualizar/")
-	public String actualizarModelos(Modelos modeloActualizado) throws NotFoundException {
+	@GetMapping("/actualizar/{id}")
+	public String actualizarModelos(@PathVariable Long id, Modelos modeloActualizado) throws NotFoundException {
 		try {
 			modServ.actualizarModelos(modeloActualizado);
 		}catch (NotFoundException e){

@@ -30,5 +30,8 @@
         </tbody>
     </table>
 <a th:href="@{/marcas/formulario}">Añadir nueva marca</a>
+<div th:if="${mensajeExito}" class="alert alert-success">
+        <p th:text="${mensajeExito}"></p>
+    </div>
 </body>
 </html>
