@@ -1,0 +1,32 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com">
+	<head>
+		<meta charset="UTF-8">
+		<title>Formulario de insercion de modelos</title>
+	</head>
+	<body>
+		<h3>Elige la marca y escribe el nombre del modelo que quieres añadir.</h3>
+		<form th:action="@{/modelos/anadir}" th:object="${modelos}" method="post">
+
+			<label for="marca">Elige una marca:</label>
+			<select id="marca" name="marca" th:field="*{marca}" required>
+				<option value="" disabled>Elige una marca</option>
+				<th:block th:each="opciones : ${listaMarcas}">
+					<option th:value="${opciones.id}" th:text="${opciones.nombre}"></option>
+				</th:block>
+			</select>
+		 
+			<label for="nombre">Nombre del modelo:</label>
+			<input type="text" id="nombre" th:field="*{nombre}"required>
+
+			<button type="submit">Añadir</button>
+		</form>
+		
+	</body>
+</html>

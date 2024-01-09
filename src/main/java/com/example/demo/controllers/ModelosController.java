@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.model.Modelos;
+import com.example.demo.model.Marcas;
+import com.example.demo.service.MarcasServiceImpl;
 import com.example.demo.service.ModelosServiceImpl;
 
 //Estas anotaciones se utilizan para indicar a java que se trata de componentes de una app Springboot
@@ -24,7 +26,8 @@ public class ModelosController {
 	//el autowired le indica a spring la ruta a seguir a la hora de compilar
 	@Autowired
 	public ModelosServiceImpl modServ;
-	
+	@Autowired
+	public MarcasServiceImpl marServ;
 	
 	@GetMapping("/listar")
 	public String listarModelos(Model model) throws NotFoundException {
@@ -54,6 +57,14 @@ public class ModelosController {
 		
 		modServ.eliminarModelos(id);
 		return "redirect:/modelos/listar";
+	}
+	
+	@GetMapping("/formulario")
+	public String mostrarFormulario(Model model) throws NotFoundException{
+		List<Marcas> listaMarcas = marServ.obtenerTodasMarcas();
+		model.addAttribute("listaMarcas",listaMarcas);
+		model.addAttribute("modelos",new Modelos());
+		return "formularioModelo";
 	}
 	
 	@PostMapping("/anadir")

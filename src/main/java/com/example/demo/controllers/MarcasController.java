@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.demo.model.Marcas;
 import com.example.demo.service.MarcasServiceImpl;
 
+
 @Controller
 @RequestMapping("/marcas")
 public class MarcasController {
@@ -29,7 +30,7 @@ public class MarcasController {
 		return "listadoMarcas";
 	}
 
-	@PostMapping("/actualizar/{id}")
+	@GetMapping("/actualizar/{id}")
 	public String actualizarMarcas(@PathVariable Long id, Marcas marcaActualizado) throws NotFoundException {
 		try {
 			marServ.actualizarMarca(marcaActualizado);
@@ -38,9 +39,9 @@ public class MarcasController {
 			//TODO aqui hay que hacer algo para que devuelva un mensaje de que algo ha ido mal y el motivo
 			//TODO hay que modificar el service para que acepte un id 
 			e.printStackTrace();
-			return "redirect:/marcas/formulario";
+			return "marcas/formulario";
 		}
-		return "redirect:marcas/listar";
+		return "marcas/listar";
 	}
 
 	@GetMapping("/eliminar/{id}")
@@ -49,6 +50,13 @@ public class MarcasController {
 		marServ.eliminarMarcas(id);
 		return "redirect:/marcas/listar";
 	}
+	
+	@GetMapping("/formulario")
+	public String mostrarFormulario(Model model) {
+		model.addAttribute("marcas", new Marcas());
+		return "formularioMarca";
+	}
+	
 
 	@PostMapping("/anadir")
 	public String anadirModelo(Marcas marcas) {
