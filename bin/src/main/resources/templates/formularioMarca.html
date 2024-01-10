@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com">
+	<head>
+		<meta charset="UTF-8">
+		<title>Formulario de insercion de marcas</title>
+	</head>
+	<body>
+		<h3>Escribe el nombre de la marca que deseas añadir</h3>
+		<form th:action="@{/marcas/anadir}" th:object="${marcas}" method="post">
+			<label for="nombre">Nombre:</label>
+			<input type="text" id="nombre" th:field="*{nombre}" required>
+			<button type="submit">Añadir</button>
+		</form>
+	</body>
+</html>

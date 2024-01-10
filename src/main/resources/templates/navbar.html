@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Navbar</title>
+</head>
+<body>
+    <nav th:fragment="navbar">
+        <ul>
+            <li><a th:href="@{/marcas/listar}">Marcas</a></li>
+            <li><a th:href="@{/modelos/listar}">Modelos</a></li>
+        </ul>
+    </nav>
+</body>
+</html>
