@@ -1,9 +1,14 @@
 package com.example.demo.repository;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.demo.model.Modelos;
 
 public interface ModelosRepository extends JpaRepository <Modelos, Long> {
-	//Operaciones CRUD básicas que vienen a través de JpaRepository
+	
+	List<Modelos> findByMarcasId(Long id);
+
 }

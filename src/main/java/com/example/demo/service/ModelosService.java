@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 
+import com.example.demo.dto.ModeloDTO;
 import com.example.demo.model.Modelos;
 
 
@@ -14,6 +15,8 @@ public interface ModelosService {
 	//controller, previa implementación desde otro service	
 	
 	public List<Modelos> obtenerTodosModelos() throws NotFoundException;
+
+	public List<ModeloDTO> obtenerModelosPorIdMarca(Long idMarca) throws NotFoundException;
 
     public Optional<Modelos> obtenerModelosPorId(Long id);
 

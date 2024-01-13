@@ -10,43 +10,41 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class Modelos {
 	
-	
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	    @Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private Long id;
+    private String nombre;
 
-	    private String nombre;
+    @ManyToOne
+    @JoinColumn(name = "id_marca", nullable = false)
+    private Marcas marcas;
 
-	    @ManyToOne
-	    @JoinColumn(name = "id_marca", nullable = false)
-	    private Marcas marcas;
+    //Getters and setters
 
-	    // Getters and setters
+    public Long getId() {
+        return id;
+    }
 
-	    public Long getId() {
-	        return id;
-	    }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	    public void setId(Long id) {
-	        this.id = id;
-	    }
+    public String getNombre() {
+        return nombre;
+    }
 
-	    public String getNombre() {
-	        return nombre;
-	    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	    public void setNombre(String nombre) {
-	        this.nombre = nombre;
-	    }
+    public Marcas getMarca() {
+        return marcas;
+    }
 
-	    public Marcas getMarca() {
-	        return marcas;
-	    }
-
-	    public void setMarca(Marcas marcas) {
-	        this.marcas = marcas;
-	    }
-	}
+    public void setMarca(Marcas marcas) {
+        this.marcas = marcas;
+    }
+}
 
 

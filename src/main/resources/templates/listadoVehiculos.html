@@ -110,25 +110,37 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Nombre</th>
                 <th>Marca</th>
+                <th>Modelo</th>
+                <th>Año</th>
+                <th>Matricula</th>
+                <th>kilometros</th>
+                <th>Color</th>
+                <th>Numero Bastidor</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
-            <!-- Iterar sobre la lista de modelos -->
-            <tr th:each="modelo : ${listaModelos}">
-                <td th:text="${modelo.id}"></td>
-                <td th:text="${modelo.nombre}"></td>
-                <td th:text="${modelo.marca.nombre}"></td> <!-- Acceso al nombre de la marca -->
+            <!-- Iterar sobre la lista de vehiculos -->
+            <tr th:each="vehiculo : ${listaVehiculos}">
+                <td th:text="${vehiculo.id}"></td>
+                <!-- Aqui las dos siguientes lineas iteran las listas de marcas y modelos y comparan el ID asociado con cada marca y modelo con el id
+                del vehiculo, hay que poner "vehiculo.id_marcas.id" porque si no se pone el ".id" al final saca la direccion de memoria solo -->
+               	<td th:each="marca : ${listaMarcas}"  th:if="${vehiculo.id_marcas.id == marca.id}" th:text="${marca.nombre}"></td>
+                <td th:each="modelo : ${listaModelos}" th:if="${vehiculo.id_modelos.id == modelo.id}" th:text="${modelo.nombre}">miau</td>
+                <td th:text="${vehiculo.anio}"></td>
+                <td th:text="${vehiculo.matricula}"></td> 
+                <td th:text="${vehiculo.kilometros}"></td>
+                <td th:text="${vehiculo.color}"></td> 
+                <td th:text="${vehiculo.nr_bastidor}"></td>
                 <td>
                     <!-- Enlaces para actualizar y eliminar cada modelo -->
-                    <a th:href="@{'/modelos/actualizar/' + ${modelo.id}}">Actualizar</a>
-                    <a th:href="@{'/modelos/eliminar/' + ${modelo.id}}">Eliminar</a>
+                    <a th:href="@{'/vehiculos/actualizar/' + ${vehiculo.id}}">Actualizar</a>
+                    <a th:href="@{'/vehiculos/eliminar/' + ${vehiculo.id}}">Eliminar</a>
                 </td>
             </tr>
         </tbody>
     </table>
-<a th:href="@{/modelos/formulario}">Añadir nuevo modelo</a>
+<a th:href="@{/vehiculos/formulario}">Añadir nuevo vehiculo</a>
 </body>
 </html>
