@@ -2,12 +2,61 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Navbar</title>
+    <style>
+        .navbar {
+            background-color: #f8f9fa;
+            color: #343a40;
+            font-size: 18px;
+            padding: 10px;
+            border-bottom: 1px solid #dee2e6;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar li {
+            display: inline-block;
+            margin-right: 20px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .navbar li:hover {
+            transform: scale(1.1);
+        }
+
+        .navbar a {
+            color: #343a40;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            color: #007bff;
+        }
+
+        .navbar-logo {
+            background-image: url('https://i.imgur.com/7bMqyvX.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 50px;
+            height: 50px;
+            display: inline-block;
+            margin-right: 10px;
+        }
+    </style>
 </head>
+
 <body>
-    <nav th:fragment="navbar">
+    <nav th:fragment="navbar" class="navbar">
+        <a href="#" class="navbar-logo"></a>
         <ul>
             <li><a th:href="@{/marcas/listar}">Marcas</a></li>
             <li><a th:href="@{/modelos/listar}">Modelos</a></li>
+            <li><a th:href="@{/marcas/formulario}">Añadir nueva marca</a></li>
+            <li><a th:href="@{/modelos/formulario}">Añadir nuevo modelo</a></li>
         </ul>
     </nav>
 </body>
