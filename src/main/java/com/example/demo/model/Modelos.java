@@ -1,16 +1,21 @@
-/**
- * Pre:---
- * Post: Clase de entidad que representa la tabla "modelos" en la base de datos.
- */
 package com.example.demo.model;
 
+<<<<<<< HEAD
 import java.util.List;
 
 import jakarta.persistence.*;
+=======
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+>>>>>>> parent of d94bf38 (Merge branch 'main' of https://github.com/Macarroncio/AccesoDatos2EV)
 
 @Entity
 public class Modelos {
-
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,51 +28,31 @@ public class Modelos {
     @OneToMany(mappedBy="modelos", cascade=CascadeType.ALL, orphanRemoval = true)
     private List<Vehiculos> vehiculos;
 
-    /**
-     * Pre:---
-     * Post: Obtiene el ID del modelo.
-     */
+    //Getters and setters
+
     public Long getId() {
         return id;
     }
 
-    /**
-     * Pre:---
-     * Post: Establece el ID del modelo.
-     */
     public void setId(Long id) {
         this.id = id;
     }
 
-    /**
-     * Pre:---
-     * Post: Obtiene el nombre del modelo.
-     */
     public String getNombre() {
         return nombre;
     }
 
-    /**
-     * Pre:---
-     * Post: Establece el nombre del modelo.
-     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    /**
-     * Pre:---
-     * Post: Obtiene la marca asociada al modelo.
-     */
     public Marcas getMarca() {
         return marcas;
     }
 
-    /**
-     * Pre:---
-     * Post: Establece la marca asociada al modelo.
-     */
     public void setMarca(Marcas marcas) {
         this.marcas = marcas;
     }
 }
+
+

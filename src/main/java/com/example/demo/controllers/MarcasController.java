@@ -1,7 +1,3 @@
-/**
- * Pre:---
- * Post: Controlador para manejar las solicitudes relacionadas con las operaciones CRUD de la entidad "Marcas".
- */
 package com.example.demo.controllers;
 
 import java.util.List;
@@ -11,34 +7,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.model.Marcas;
 import com.example.demo.service.MarcasServiceImpl;
 
+
 @Controller
 @RequestMapping("/marcas")
 public class MarcasController {
+	
+	
 
-    // Servicio para realizar operaciones relacionadas con la entidad "Marcas".
-    @Autowired
-    public MarcasServiceImpl marServ;
+	//TODO añadir todos los comentarios pertinentes para cada funcion
+	@Autowired
+	public MarcasServiceImpl marServ;
 
-    /**
-     * Pre:---
-     * Post: Maneja las solicitudes GET a "/marcas/listar" y muestra un listado de todas las marcas.
-     */
-    @GetMapping("/listar")
-    public String listarMarcas(Model model) throws NotFoundException {
-        List<Marcas> listaMarcas = marServ.obtenerTodasMarcas();
-        model.addAttribute("listaMarcas", listaMarcas);
-
-        String mensajeExito = "Operación realizada con éxito";
+	@GetMapping("/listar")
+	public String listarMarcas(Model model) throws NotFoundException {
+		List<Marcas> listaMarcas = marServ.obtenerTodasMarcas();
+		model.addAttribute("listaMarcas", listaMarcas);
+		
+		String mensajeExito = "Operación realizada con éxito";
         model.addAttribute("mensajeExito", mensajeExito);
-
+		
         return "listadoMarcas";
-    }
+	}
 
+<<<<<<< HEAD
     /**
      * Pre:---
      * Post: Maneja las solicitudes GET a "/marcas/actualizar/{id}" y actualiza la marca con el ID proporcionado.
@@ -59,34 +58,41 @@ public class MarcasController {
             return "marcas/listar"; // Considerar cambiar a un nombre lógico de vista de error.
         }
     }
+=======
+	@GetMapping("/actualizar/{id}")
+	public String actualizarMarcas(@PathVariable Long id) throws NotFoundException {
+		try {
+			Optional<Marcas> optMarca = marServ.obtenerMarcasPorId(id);
+			Marcas marcaActualizada = optMarca.orElse(null);
+			marServ.actualizarMarca(marcaActualizada);
+		}catch (NotFoundException e){
+>>>>>>> parent of d94bf38 (Merge branch 'main' of https://github.com/Macarroncio/AccesoDatos2EV)
 
-    /**
-     * Pre:---
-     * Post: Maneja las solicitudes GET a "/marcas/eliminar/{id}" y elimina la marca con el ID proporcionado.
-     */
-    @GetMapping("/eliminar/{id}")
-    public String eliminarMarcas(@PathVariable Long id) throws NotFoundException {
-        marServ.eliminarMarcas(id);
-        return "redirect:/marcas/listar";
-    }
+			//TODO aqui hay que hacer algo para que devuelva un mensaje de que algo ha ido mal y el motivo
+			//TODO hay que modificar el service para que acepte un id 
+			e.printStackTrace();
+			return "marcas/listar";
+		}
+		return "formularioMarca";
+	}
 
-    /**
-     * Pre:---
-     * Post: Maneja las solicitudes GET a "/marcas/formulario" y muestra el formulario para agregar una nueva marca.
-     */
-    @GetMapping("/formulario")
-    public String mostrarFormulario(Model model) {
-        model.addAttribute("marcas", new Marcas());
-        return "formularioMarca";
-    }
+	@GetMapping("/eliminar/{id}")
+	public String eliminarMarcas(@PathVariable Long id) throws NotFoundException {
 
-    /**
-     * Pre:---
-     * Post: Maneja las solicitudes POST a "/marcas/anadir" y añade una nueva marca.
-     */
-    @PostMapping("/anadir")
-    public String anadirModelo(Marcas marcas) {
-        marServ.anadirMarcas(marcas);
-        return "redirect:/marcas/listar";
-    }
+		marServ.eliminarMarcas(id);
+		return "redirect:/marcas/listar";
+	}
+	
+	@GetMapping("/formulario")
+	public String mostrarFormulario(Model model) {
+		model.addAttribute("marcas", new Marcas());
+		return "formularioMarca";
+	}
+	
+
+	@PostMapping("/anadir")
+	public String anadirModelo(Marcas marcas) {
+		marServ.anadirMarcas(marcas);
+		return "redirect:/marcas/listar";
+	}
 }
