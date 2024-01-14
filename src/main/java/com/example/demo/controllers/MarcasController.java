@@ -44,17 +44,20 @@ public class MarcasController {
      * Post: Maneja las solicitudes GET a "/marcas/actualizar/{id}" y actualiza la marca con el ID proporcionado.
      */
     @GetMapping("/actualizar/{id}")
-    public String actualizarMarcas(@PathVariable Long id) throws NotFoundException {
+    public String actualizarMarcas(@PathVariable Long id, Model model) throws NotFoundException {
         try {
             Optional<Marcas> optMarca = marServ.obtenerMarcasPorId(id);
             Marcas marcaActualizada = optMarca.orElse(null);
-            marServ.actualizarMarca(marcaActualizada);
+            if(optMarca.isPresent()) {
+            	model.addAttribute("marca",marcaActualizada);
+            	marServ.actualizarMarca(marcaActualizada);
+            	return "formularioMarca";
+            }else return "redirect:/marcas/listar";
         } catch (NotFoundException e) {
             // Manejar la excepción y devolver un mensaje de error.
             e.printStackTrace();
             return "marcas/listar"; // Considerar cambiar a un nombre lógico de vista de error.
         }
-        return "formularioMarca";
     }
 
     /**

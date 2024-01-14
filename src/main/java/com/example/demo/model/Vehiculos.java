@@ -23,11 +23,11 @@ public class Vehiculos {
 
     @ManyToOne
     @JoinColumn(name = "id_marca", nullable = false)
-    private Marcas id_marcas;
+    private Marcas marcas;
 
     @ManyToOne
     @JoinColumn(name = "id_modelo", nullable = false)
-    private Modelos id_modelos;
+    private Modelos modelos;
 
     /**
      * Pre:---
@@ -129,31 +129,31 @@ public class Vehiculos {
      * Pre:---
      * Post: Obtiene la marca del vehículo.
      */
-    public Marcas getId_marcas() {
-        return id_marcas;
+    public Marcas getMarcas() {
+        return marcas;
     }
 
     /**
      * Pre:---
      * Post: Establece la marca del vehículo.
      */
-    public void setId_marcas(Marcas id_marcas) {
-        this.id_marcas = id_marcas;
+    public void setMarcas(Marcas marcas) {
+        this.marcas = marcas;
     }
 
     /**
      * Pre:---
      * Post: Obtiene el modelo del vehículo.
      */
-    public Modelos getId_modelos() {
-        return id_modelos;
+    public Modelos getModelos() {
+        return modelos;
     }
 
     /**
      * Pre:---
      * Post: Establece el modelo del vehículo.
      */
-    public void setId_modelos(Modelos id_modelos) {
-        this.id_modelos = id_modelos;
+    public void setModelos(Modelos modelos) {
+        this.modelos = modelos;
     }
 }

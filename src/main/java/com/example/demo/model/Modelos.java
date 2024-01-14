@@ -4,6 +4,8 @@
  */
 package com.example.demo.model;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -18,6 +20,8 @@ public class Modelos {
     @ManyToOne
     @JoinColumn(name = "id_marca", nullable = false)
     private Marcas marcas;
+    @OneToMany(mappedBy="modelos", cascade=CascadeType.ALL, orphanRemoval = true)
+    private List<Vehiculos> vehiculos;
 
     /**
      * Pre:---
