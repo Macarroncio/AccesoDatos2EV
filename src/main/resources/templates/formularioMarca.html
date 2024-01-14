@@ -74,7 +74,7 @@
     </style>
 </head>
 <body>
-	<div th:replace="navbar :: navbar"></div>
+	<div th:replace="~{navbar :: navbar}"></div>
     <h3>Escribe el nombre de la marca que deseas añadir</h3>
     <form th:action="@{/marcas/anadir}" th:object="${marcas}" method="post">
         <label for="nombre">Nombre:</label>

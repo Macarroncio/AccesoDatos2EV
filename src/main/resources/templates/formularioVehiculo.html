@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com">
+	<head>
+		<meta charset="UTF-8">
+		<title>Formulario de insercion de vehiculos</title>
+	
+	</head>
+	<body>
+		<h3>Elige la marca y el modelo e introduce los datos del vehiculo que quieres insertar.</h3>
+		<form th:action="@{/vehiculos/anadir}" th:object="${vehiculo}" method="post">
+
+			<label for="marca">Elige una marca:</label>
+			<select id="marca" name="marca" th:field="*{id_marcas}" th:onchange="cambioMarca()" required>
+				<option value="" disabled selected>Elige una marca</option>
+				<option th:each="marca : ${listaMarcas}" th:value="${marca.id}" th:text="${marca.nombre}"></option>
+			</select>
+		 	<label for="modelo">Elige un modelo:</label>
+			<select id="modelo" name="modelo" th:field="*{id_modelos}"  required>
+				<option value="" disabled selected>Elige un modelo</option>
+					<option th:each="modelo : ${listaModelos}"  th:value="${modelo.id}" th:text="${modelo.nombre}"></option>
+			</select>
+		 
+			<label for="anio">Año del vehiculo:</label>
+			<!-- la minima del campo de año tiene que ser igual o superior a 1901 porque sino da problemas con la base de datos -->
+			<input type="number" id="anio" th:field="*{anio}" min="1901" max="2099" step="1" value="2016" />
+			
+			<label for="matricula">Matricula del vehiculo:</label>
+			<input type="text" id="matricula" th:field="*{matricula}"required>
+			
+			<label for="kilometros">Kilometros del vehiculo:</label>
+			<input type="text" id="kilometros" th:field="*{kilometros}">
+			
+			<label for="color">Color del vehiculo:</label>
+			<input type="text" id="color" th:field="*{color}">
+			
+			<label for="nr_bastidor">Numero de Bastidor del vehiculo:</label>
+			<input type="text" id="nr_bastidor" th:field="*{nr_bastidor}"required>
+
+			<button type="submit">Añadir</button>
+		</form>
+<script>
+        var modelsData = [];  // Array to store all models
+
+        // Assuming you have a global variable with all models available
+        fetch("/modelos/obtenerModelos")
+            .then(response => response.json())
+            .then(data => {
+                modelsData = data;
+            })
+            .catch(error => console.error("Error fetching all models:", error));
+
+        var marca = document.getElementById("marca");
+        var modelo = document.getElementById("modelo");
+
+        marca.addEventListener("change", function cambioMarca() {
+            var marcaElejida = marca.value;
+
+            // Filter models based on the selected brand's ID
+            var filteredModels = modelsData.filter(function (model) {
+                return model.marca.id == marcaElejida;
+            });
+
+            // Clear existing options in the models dropdown
+            modelo.innerHTML = "";
+
+            // Populate the models dropdown based on the filtered models
+            filteredModels.forEach(function (model) {
+                var option = document.createElement("option");
+                option.value = model.id;
+                option.text = model.nombre;
+                modelo.add(option);
+            });
+        });
+    </script>
+	</body>
+</html>

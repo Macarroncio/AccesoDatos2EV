@@ -80,7 +80,7 @@
     </style>
 	</head>
 	<body>
-		<div th:replace="navbar :: navbar"></div>
+		<div th:replace="~{navbar :: navbar}"></div>
 		<h3>Elige la marca y escribe el nombre del modelo que quieres añadir.</h3>
 		<form th:action="@{/modelos/anadir}" th:object="${modelos}" method="post">
 			<label for="marca">Elige una marca:</label>
