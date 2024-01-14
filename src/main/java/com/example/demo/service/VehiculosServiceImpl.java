@@ -22,7 +22,8 @@ public class VehiculosServiceImpl implements VehiculosService {
 
     @Override
     public List<Vehiculos> obtenerTodosVehiculos() throws NotFoundException {
-        return vehiculosRepository.findAll();
+    	List<Vehiculos> listaVehiculos=vehiculosRepository.findAll();
+    	return listaVehiculos;
     }
 
     @Override

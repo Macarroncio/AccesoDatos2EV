@@ -10,12 +10,12 @@
 		<form th:action="@{/vehiculos/anadir}" th:object="${vehiculo}" method="post">
 
 			<label for="marca">Elige una marca:</label>
-			<select id="marca" name="marca" th:field="*{id_marcas}" th:onchange="cambioMarca()" required>
+			<select id="marca" name="idmarca" th:field="*{marcas.id}" th:onchange="cambioMarca()" required>
 				<option value="" disabled selected>Elige una marca</option>
 				<option th:each="marca : ${listaMarcas}" th:value="${marca.id}" th:text="${marca.nombre}"></option>
 			</select>
 		 	<label for="modelo">Elige un modelo:</label>
-			<select id="modelo" name="modelo" th:field="*{id_modelos}"  required>
+			<select id="modelo" name="modelo" th:field="*{modelos.id}"  required>
 				<option value="" disabled selected>Elige un modelo</option>
 					<option th:each="modelo : ${listaModelos}"  th:value="${modelo.id}" th:text="${modelo.nombre}"></option>
 			</select>
@@ -57,7 +57,7 @@
 
             // Filter models based on the selected brand's ID
             var filteredModels = modelsData.filter(function (model) {
-                return model.marca.id == marcaElejida;
+                return model.marcas.id == marcaElejida;
             });
 
             // Clear existing options in the models dropdown
