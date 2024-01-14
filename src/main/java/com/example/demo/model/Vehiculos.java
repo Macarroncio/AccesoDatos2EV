@@ -1,98 +1,159 @@
+/**
+ * Pre:---
+ * Post: Clase de entidad que representa la tabla "vehiculos" en la base de datos.
+ */
 package com.example.demo.model;
 
 import java.time.Year;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 @Entity
 public class Vehiculos {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	private String matricula;
-	private int kilometros;
-	private String color;
-	private String nr_bastidor;
-	private Year anio;
 
-	@ManyToOne
-	@JoinColumn(name = "id_marca", nullable = false)
-	private Marcas id_marcas;
-	
-	@ManyToOne
-	@JoinColumn(name = "id_modelo", nullable = false)
-	private Modelos id_modelos;
-	
-	// Getters and setters
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	public Long getId() {
-		return id;
-	}
+    private String matricula;
+    private int kilometros;
+    private String color;
+    private String nr_bastidor;
+    private Year anio;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	public Year getAnio() {
-		return anio;
-	}
-	
-	public void setAnio(Year anio) {
-		this.anio = anio;
-	}
+    @ManyToOne
+    @JoinColumn(name = "id_marca", nullable = false)
+    private Marcas id_marcas;
 
-	public String getMatricula() {
-		return matricula;
-	}
+    @ManyToOne
+    @JoinColumn(name = "id_modelo", nullable = false)
+    private Modelos id_modelos;
 
-	public void setMatricula(String matricula) {
-		this.matricula = matricula;
-	}
+    /**
+     * Pre:---
+     * Post: Obtiene el ID del vehículo.
+     */
+    public Long getId() {
+        return id;
+    }
 
-	public int getKilometros() {
-		return kilometros;
-	}
+    /**
+     * Pre:---
+     * Post: Establece el ID del vehículo.
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setKilometros(int kilometros) {
-		this.kilometros = kilometros;
-	}
+    /**
+     * Pre:---
+     * Post: Obtiene el año del vehículo.
+     */
+    public Year getAnio() {
+        return anio;
+    }
 
-	public String getColor() {
-		return color;
-	}
+    /**
+     * Pre:---
+     * Post: Establece el año del vehículo.
+     */
+    public void setAnio(Year anio) {
+        this.anio = anio;
+    }
 
-	public void setColor(String color) {
-		this.color = color;
-	}
+    /**
+     * Pre:---
+     * Post: Obtiene la matrícula del vehículo.
+     */
+    public String getMatricula() {
+        return matricula;
+    }
 
-	public String getNr_bastidor() {
-		return nr_bastidor;
-	}
+    /**
+     * Pre:---
+     * Post: Establece la matrícula del vehículo.
+     */
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
 
-	public void setNr_bastidor(String nr_bastidor) {
-		this.nr_bastidor = nr_bastidor;
-	}
+    /**
+     * Pre:---
+     * Post: Obtiene los kilómetros del vehículo.
+     */
+    public int getKilometros() {
+        return kilometros;
+    }
 
-	public Marcas getId_marcas() {
-		return id_marcas;
-	}
+    /**
+     * Pre:---
+     * Post: Establece los kilómetros del vehículo.
+     */
+    public void setKilometros(int kilometros) {
+        this.kilometros = kilometros;
+    }
 
-	public void setId_marcas(Marcas id_marcas) {
-		this.id_marcas = id_marcas;
-	}
+    /**
+     * Pre:---
+     * Post: Obtiene el color del vehículo.
+     */
+    public String getColor() {
+        return color;
+    }
 
-	public Modelos getId_modelos() {
-		return id_modelos;
-	}
+    /**
+     * Pre:---
+     * Post: Establece el color del vehículo.
+     */
+    public void setColor(String color) {
+        this.color = color;
+    }
 
-	public void setId_modelos(Modelos id_modelos) {
-		this.id_modelos = id_modelos;
-	}
+    /**
+     * Pre:---
+     * Post: Obtiene el número de bastidor del vehículo.
+     */
+    public String getNr_bastidor() {
+        return nr_bastidor;
+    }
+
+    /**
+     * Pre:---
+     * Post: Establece el número de bastidor del vehículo.
+     */
+    public void setNr_bastidor(String nr_bastidor) {
+        this.nr_bastidor = nr_bastidor;
+    }
+
+    /**
+     * Pre:---
+     * Post: Obtiene la marca del vehículo.
+     */
+    public Marcas getId_marcas() {
+        return id_marcas;
+    }
+
+    /**
+     * Pre:---
+     * Post: Establece la marca del vehículo.
+     */
+    public void setId_marcas(Marcas id_marcas) {
+        this.id_marcas = id_marcas;
+    }
+
+    /**
+     * Pre:---
+     * Post: Obtiene el modelo del vehículo.
+     */
+    public Modelos getId_modelos() {
+        return id_modelos;
+    }
+
+    /**
+     * Pre:---
+     * Post: Establece el modelo del vehículo.
+     */
+    public void setId_modelos(Modelos id_modelos) {
+        this.id_modelos = id_modelos;
+    }
 }
