@@ -22,8 +22,9 @@ public class Vehiculos {
     private Year anio;
 
     @ManyToOne
-    @JoinColumn(name = "id_marca", nullable = false)
+    @JoinColumn(name = "id_marcas", nullable = false)
     private Marcas id_marcas;
+
 
     @ManyToOne
     @JoinColumn(name = "id_modelo", nullable = false)

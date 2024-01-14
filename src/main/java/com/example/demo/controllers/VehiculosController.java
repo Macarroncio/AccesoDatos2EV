@@ -65,9 +65,9 @@ public class VehiculosController {
      * Post: Maneja las solicitudes GET a "/vehiculos/eliminar/{id}" y elimina el vehículo con el ID proporcionado.
      */
     @GetMapping("/eliminar/{id}")
-    public String eliminarVehiculos(@RequestParam Long id) throws NotFoundException {
+    public String eliminarVehiculos(@PathVariable Long id) throws NotFoundException {
         vehServ.eliminarVehiculos(id);
-        return "index";
+        return "redirect:/vehiculos/listar";
     }
 
     /**
