@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -75,7 +76,14 @@ public class ModelosController {
         model.addAttribute("modelos", new Modelos());
         return "formularioModelo";
     }
-
+    
+    @GetMapping("/obtenerModelos")
+    public ResponseEntity<List<Modelos>> obtenerModelos() throws NotFoundException {
+        // Your logic to fetch models
+        List<Modelos> modelos = modServ.obtenerTodosModelos();// fetch models from the database or elsewhere
+        return ResponseEntity.ok(modelos);
+    }
+    
     /**
      * Pre:---
      * Post: Maneja las solicitudes POST a "/modelos/anadir" y añade un nuevo modelo.

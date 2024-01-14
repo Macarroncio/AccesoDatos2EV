@@ -22,8 +22,12 @@ public class Marcas {
 
     @OneToMany(mappedBy = "marcas", cascade = CascadeType.ALL)
     private List<Modelos> modelos;
+<<<<<<< Updated upstream
     
     @OneToMany(mappedBy = "id_marcas", cascade = CascadeType.ALL, orphanRemoval = true)
+=======
+    @OneToMany(mappedBy="marcas", cascade=CascadeType.ALL, orphanRemoval = true)
+>>>>>>> Stashed changes
     private List<Vehiculos> vehiculos;
 
     /**
