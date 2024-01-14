@@ -22,13 +22,10 @@ public class Vehiculos {
     private Year anio;
 
     @ManyToOne
-<<<<<<< Updated upstream
     @JoinColumn(name = "id_marcas", nullable = false)
     private Marcas id_marcas;
-=======
     @JoinColumn(name = "id_marca", nullable = false)
     private Marcas marcas;
->>>>>>> Stashed changes
 
 
     @ManyToOne
