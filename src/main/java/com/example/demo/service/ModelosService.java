@@ -16,7 +16,8 @@ public interface ModelosService {
 	
 	public List<Modelos> obtenerTodosModelos() throws NotFoundException;
 
-	public List<ModeloDTO> obtenerModelosPorIdMarca(Long idMarca) throws NotFoundException;
+	//declaracion de la consulta que devuelve una lista llena de DTOs
+	List<ModeloDTO> obtenerModelos() throws NotFoundException;
 
     public Optional<Modelos> obtenerModelosPorId(Long id);
 

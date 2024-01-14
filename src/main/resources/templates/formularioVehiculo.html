@@ -10,16 +10,14 @@
 		<form th:action="@{/vehiculos/anadir}" th:object="${vehiculo}" method="post">
 
 			<label for="marca">Elige una marca:</label>
-			<select id="marca" name="marca" th:field="*{id_marcas}" onchange="cambioMarca()" required>
+			<select id="marca" name="marca" th:field="*{id_marcas}" th:onchange="cambioMarca()" required>
 				<option value="" disabled selected>Elige una marca</option>
 				<option th:each="marca : ${listaMarcas}" th:value="${marca.id}" th:text="${marca.nombre}"></option>
 			</select>
 		 	<label for="modelo">Elige un modelo:</label>
 			<select id="modelo" name="modelo" th:field="*{id_modelos}"  required>
-				<option value="" disabled selected>Elige una modelo</option>
-				<th:block th:each="marca : ${listaMarcas}">
-					<option th:each="modelo : ${listaModelos}" th:if="${marca.id == modelo.id}" th:value="${modelo.id}" th:text="${modelo.nombre}"></option>
-				</th:block>
+				<option value="" disabled selected>Elige un modelo</option>
+					<option th:each="modelo : ${listaModelos}"  th:value="${modelo.id}" th:text="${modelo.nombre}"></option>
 			</select>
 		 
 			<label for="anio">Año del vehiculo:</label>
@@ -40,35 +38,39 @@
 
 			<button type="submit">Añadir</button>
 		</form>
-	<!--
-		 <script>
+<script>
+        var modelsData = [];  // Array to store all models
+
+        // Assuming you have a global variable with all models available
+        fetch("/modelos/obtenerModelos")
+            .then(response => response.json())
+            .then(data => {
+                modelsData = data;
+            })
+            .catch(error => console.error("Error fetching all models:", error));
+
         var marca = document.getElementById("marca");
         var modelo = document.getElementById("modelo");
 
-        marca.addEventListener("change", function () {
-            // Fetch models for the selected brand from the server using AJAX
+        marca.addEventListener("change", function cambioMarca() {
             var marcaElejida = marca.value;
 
-            // You can use AJAX to fetch models based on the selected brand
-            // and then update the models dropdown accordingly
+            // Filter models based on the selected brand's ID
+            var filteredModels = modelsData.filter(function (model) {
+                return model.marca.id == marcaElejida;
+            });
 
-            // For simplicity, I'll assume your service endpoint returns JSON
-            fetch("/getModelosByBrand?brand=" + marcaElejida)
-                .then(response => response.json())
-                .then(data => {
-                    // Clear existing options in the models dropdown
-                    modelo.innerHTML = "";
+            // Clear existing options in the models dropdown
+            modelo.innerHTML = "";
 
-                    // Populate the models dropdown based on the response data
-                    data.forEach(function (model) {
-                        var option = document.createElement("option");
-                        option.value = model.id;
-                        option.text = model.nombre;
-                        modelo.add(option);
-                    });
-                })
-                .catch(error => console.error("Error fetching models:", error));
+            // Populate the models dropdown based on the filtered models
+            filteredModels.forEach(function (model) {
+                var option = document.createElement("option");
+                option.value = model.id;
+                option.text = model.nombre;
+                modelo.add(option);
+            });
         });
-    </script> -->	
+    </script>
 	</body>
 </html>

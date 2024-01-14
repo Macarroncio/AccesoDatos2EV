@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.model.Modelos;
 import com.example.demo.dto.ModeloDTO;
@@ -69,11 +68,12 @@ public class ModelosController {
 		model.addAttribute("modelos",new Modelos());
 		return "formularioModelo";
 	}
-	 @GetMapping("/getModelosByBrand")
-	    public ResponseEntity<List<ModeloDTO>> getModelosByBrand(@RequestParam("Marca") Long brandId) throws NotFoundException {
-	        List<ModeloDTO> modelos = modServ.obtenerModelosPorIdMarca(brandId);
-	        return ResponseEntity.ok(modelos);
-	    }
+	//response entity contiene toda la respuesta HTTP e informa de que esta todo bien, tambien se puede customizar la respuesta.
+    @GetMapping("/obtenerModelos")
+    public ResponseEntity<List<ModeloDTO>> getAllModels() throws NotFoundException {
+        List<ModeloDTO> models = modServ.obtenerModelos();
+        return (ResponseEntity<List<ModeloDTO>>) ResponseEntity.ok(models);
+    }
 	
 	@PostMapping("/anadir")
 	public String anadirModelo(Modelos modelos) {

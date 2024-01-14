@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -10,7 +9,6 @@ import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.ModeloDTO;
-import com.example.demo.model.Marcas;
 import com.example.demo.model.Modelos;
 import com.example.demo.repository.MarcasRepository;
 import com.example.demo.repository.ModelosRepository;
@@ -67,24 +65,18 @@ public class ModelosServiceImpl implements ModelosService {
 		
 		
 	}
-
+	// aqui basicamente lo que pasa es que se crea una copia de los modelos en un Data File Object (DTO) 
+	// este objeto se utiliza para transferir datos .
 	@Override
-	 public List<ModeloDTO> obtenerModelosPorIdMarca(Long idMarca) throws NotFoundException {
-        Optional<Marcas> marca = marcasRepository.findById(idMarca);
-
-        if (marca.isPresent()) {
-            // Fetch models by the brand entity
-            List<Modelos> modelosByMarca = modelosRepository.findByMarcasId(idMarca);
-            
-            // Convert the list of Modelos to a list of ModeloDTO
-            List<ModeloDTO> modeloDTOs = modelosByMarca.stream()
-                    .map(modelo -> new ModeloDTO(modelo.getId(), modelo.getNombre())) // Assuming you have a constructor in ModeloDTO
-                    .collect(Collectors.toList());
-
-            return modeloDTOs;
-        } else {
-            // Handle the case where the brand is not found
-            throw new NotFoundException();
-        }
-    }
+	public List<ModeloDTO> obtenerModelos() throws NotFoundException {
+	    List<Modelos> modelos = modelosRepository.findAll();
+	    return convertToDTOs(modelos);
+	}
+	//este es un metodo privado para el metodo "obtenerModelos()" que se encarga de copiar los modelos
+	// y convertirlos en DTOs para que luego los envie de vuelta al metodo que lo llamo.
+	private List<ModeloDTO> convertToDTOs(List<Modelos> modelos) {
+	    return modelos.stream()
+	    		.map(modelo -> new ModeloDTO(modelo.getId(), modelo.getMarca(),modelo.getNombre()))
+	    		.collect(Collectors.toList());
+	}
 }
