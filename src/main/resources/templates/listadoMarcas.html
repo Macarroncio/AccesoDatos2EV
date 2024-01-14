@@ -89,7 +89,7 @@
 				<td th:text="${marca.nombre}"></td>
 				<td>
 					<!-- Enlaces para actualizar y eliminar cada marca -->
-					<a th:href="@{'/marcas/formularioMarca/' + ${marca.id}}" class="boton-lujoso">Actualizar</a>
+					<a th:href="@{/marcas/formulario}" class="boton-lujoso">Actualizar</a>
 					<a th:href="@{'/marcas/eliminar/' + ${marca.id}}" class="boton-lujoso">Eliminar</a>
 				</td>
 			</tr>
