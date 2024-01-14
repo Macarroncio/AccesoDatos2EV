@@ -1,59 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Concesionario de Lujo</title>
-    <style>
-        body {
-            background-color: #1a1a1a;
-            background-size: cover;
-            background-position: center;
-            color: white;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-
-        h1 {
-            color: gold;
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-
-        p {
-            font-size: 24px;
-            text-align: center;
-            max-width: 600px;
-            margin-bottom: 40px;
-        }
-
-        a {
-            color: gold;
-            text-decoration: none;
-            font-size: 18px;
-            padding: 10px 20px;
-            border: 1px solid gold;
-            border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        a:hover {
-            background-color: gold;
-            color: black;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>test</title>
 </head>
 <body>
-
-    <h1>Bienvenido al Concesionario</h1>
-    <p>Explora nuestra increíble selección de vehículos. Encuentra el coche de tus sueños hoy mismo.</p>
-    <a th:href="@{/vehiculos/listar}">Ver Catálogo</a>
-
-
+<a th:href="@{/marcas/listar}">Marcas</a>
+<a th:href="@{/modelos/listar}">Modelos</a>
+<a th:href="@{/vehiculos/listar}">Vehiculos</a>
+<a th:href="@{/marcas/formulario}">Añadir nueva marca</a>
+<a th:href="@{/modelos/formulario}">Añadir nuevo modelo</a>
+<a th:href="@{/vehiculos/formulario}">Añadir nuevo vehiculo</a>
 </body>
 </html>
