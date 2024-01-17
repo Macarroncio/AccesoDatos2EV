@@ -37,7 +37,6 @@ public class MarcasController {
         return "listadoMarcas";
 	}
 
-<<<<<<< HEAD
     /**
      * Pre:---
      * Post: Maneja las solicitudes GET a "/marcas/actualizar/{id}" y actualiza la marca con el ID proporcionado.
@@ -58,24 +57,8 @@ public class MarcasController {
             return "marcas/listar"; // Considerar cambiar a un nombre lógico de vista de error.
         }
     }
-=======
-	@GetMapping("/actualizar/{id}")
-	public String actualizarMarcas(@PathVariable Long id) throws NotFoundException {
-		try {
-			Optional<Marcas> optMarca = marServ.obtenerMarcasPorId(id);
-			Marcas marcaActualizada = optMarca.orElse(null);
-			marServ.actualizarMarca(marcaActualizada);
-		}catch (NotFoundException e){
->>>>>>> parent of d94bf38 (Merge branch 'main' of https://github.com/Macarroncio/AccesoDatos2EV)
 
-			//TODO aqui hay que hacer algo para que devuelva un mensaje de que algo ha ido mal y el motivo
-			//TODO hay que modificar el service para que acepte un id 
-			e.printStackTrace();
-			return "marcas/listar";
-		}
-		return "formularioMarca";
-	}
-
+	
 	@GetMapping("/eliminar/{id}")
 	public String eliminarMarcas(@PathVariable Long id) throws NotFoundException {
 

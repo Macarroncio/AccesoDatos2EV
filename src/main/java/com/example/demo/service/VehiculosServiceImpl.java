@@ -28,18 +28,10 @@ public class VehiculosServiceImpl implements VehiculosService{
 		return vehiculo;
 	}
 
-<<<<<<< HEAD
-    @Override
-    public List<Vehiculos> obtenerTodosVehiculos() throws NotFoundException {
-    	List<Vehiculos> listaVehiculos=vehiculosRepository.findAll();
-    	return listaVehiculos;
-    }
-=======
 	@Override
 	public Vehiculos actualizarVehiculos(Vehiculos vehiculoActualizado) throws NotFoundException {
 		Long id= vehiculoActualizado.getId();
 		Optional<Vehiculos> vehiculoExistente= obtenerVehiculosPorId(id);
->>>>>>> parent of d94bf38 (Merge branch 'main' of https://github.com/Macarroncio/AccesoDatos2EV)
 
 		if(vehiculoExistente.isPresent()) {
 			vehiculosRepository.save(vehiculoActualizado);
